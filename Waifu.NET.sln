@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu.NET", "src\Waifu.NET\Waifu.NET.csproj", "{3E558FE9-5F93-4348-9B6F-4ECFD918C216}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waifu.NET.Tests", "src\Waifu.NET.Tests\Waifu.NET.Tests.csproj", "{9FD55291-BAD4-49E9-9148-6A0C368F3E55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{3E558FE9-5F93-4348-9B6F-4ECFD918C216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E558FE9-5F93-4348-9B6F-4ECFD918C216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E558FE9-5F93-4348-9B6F-4ECFD918C216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD55291-BAD4-49E9-9148-6A0C368F3E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD55291-BAD4-49E9-9148-6A0C368F3E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD55291-BAD4-49E9-9148-6A0C368F3E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD55291-BAD4-49E9-9148-6A0C368F3E55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

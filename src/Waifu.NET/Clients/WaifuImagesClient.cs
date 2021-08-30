@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Waifu
+﻿namespace Waifu
 {
 	using Entities;
 	using System.Net;
@@ -9,6 +7,7 @@ namespace Waifu
 	using System.Net.Http.Json;
 	using System.Threading.Tasks;
 	using WaifuShork.Common.QuickLinq;
+	using Microsoft.Extensions.Logging;
 	using Microsoft.Toolkit.Diagnostics;
 
 	public class WaifuImagesClient
@@ -19,6 +18,12 @@ namespace Waifu
 			this._waifuClient = config;
 		}
 		
+		/// <summary>
+		/// Gets 30 SFW images from waifu.net, along with the ability to exclude specific links 
+		/// </summary>
+		/// <param name="excludes"></param>
+		/// <param name="category"></param>
+		/// <returns>WaifuImages</returns>
 		public async Task<WaifuImages> GetManyRandomSfwAsync(string[] excludes = null, SfwCategory category = SfwCategory.Waifu)
 		{
 			if (excludes == null)
@@ -30,7 +35,11 @@ namespace Waifu
 				excludes.ConcatQ(this._waifuClient.Config.DefaultExcludes);
 			}
 
-			this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
+			if (this._waifuClient.Config.Logger != null)
+			{
+				this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
+			}			
+			
 			var url = Endpoints.GetSfwEndpoint(category, true);
 			var response = await this._waifuClient.HttpClient.PostAsJsonAsync(url, new { exclude = excludes }, this._waifuClient.CancellationToken);
 			
@@ -43,6 +52,13 @@ namespace Waifu
 			return await JsonSerializer.DeserializeAsync<WaifuImages>(stream, this._waifuClient.JsonSerializerOptions, this._waifuClient.CancellationToken);
 		}
 
+		
+		/// <summary>
+		/// Gets 30 NSFW images from waifu.net, along with the ability to exclude specific links 
+		/// </summary>
+		/// <param name="excludes"></param>
+		/// <param name="category"></param>
+		/// <returns>WaifuImages</returns>
 		public async Task<WaifuImages> GetManyRandomNsfwAsync(string[] excludes = null, NsfwCategory category = NsfwCategory.Waifu)
 		{
 			if (excludes == null)
@@ -53,8 +69,11 @@ namespace Waifu
 			{
 				excludes.ConcatQ(this._waifuClient.Config.DefaultExcludes);
 			}
-			
-			this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random NSFWs");
+
+			if (this._waifuClient.Config.Logger != null)
+			{
+				this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random NSFWs");
+			}
 			var url = Endpoints.GetNsfwEndpoint(category, true);
 			var response = await this._waifuClient.HttpClient.PostAsJsonAsync(url, new { exclude = excludes }, this._waifuClient.CancellationToken);
 			

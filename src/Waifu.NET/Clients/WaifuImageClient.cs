@@ -17,9 +17,18 @@ namespace Waifu
 			this._waifuClient = wf;
 		}
 		
+		/// <summary>
+		/// Gets a single SFW image from waifu.pics 
+		/// </summary>
+		/// <param name="category"></param>
+		/// <returns>WaifuImage</returns>
 		public async Task<WaifuImage> GetRandomSfwAsync(SfwCategory category = SfwCategory.Waifu)
 		{
-			this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random SFW");
+			if (this._waifuClient.Config.Logger != null)
+			{
+				this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random SFW");
+			}			
+
 			var url = Endpoints.GetSfwEndpoint(category, false);
 			var response = await this._waifuClient.HttpClient.GetAsync(url);
 			
@@ -32,9 +41,18 @@ namespace Waifu
 			return await JsonSerializer.DeserializeAsync<WaifuImage>(stream, this._waifuClient.JsonSerializerOptions, this._waifuClient.CancellationToken);
 		}
 
+		/// <summary>
+		/// Gets a single NSFW image from waifu.pics 
+		/// </summary>
+		/// <param name="category"></param>
+		/// <returns>WaifuImage</returns>
 		public async Task<WaifuImage> GetRandomNsfwAsync(NsfwCategory category = NsfwCategory.Waifu)
 		{
-			this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random NSFW");
+			if (this._waifuClient.Config.Logger != null)
+			{
+				this._waifuClient.Config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random NSFW");
+			}			
+			
 			var url = Endpoints.GetNsfwEndpoint(category, false);
 			var response = await this._waifuClient.HttpClient.GetAsync(url);
 			
