@@ -2,7 +2,7 @@
 {
 	using System.Text.Json.Serialization;
 	
-	public class WaifuImages
+	internal class WaifuImages
 	{
 		[JsonPropertyName("files")]
 		public string[] Files { get; set; }
