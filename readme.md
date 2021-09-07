@@ -8,20 +8,26 @@ Supports both SFW and NSFW endpoints.
 ```c#
 var client = new WaifuClient(new WaifuConfiguration 
 {
+    // Gives you the option to exclude specific links from queries
     DefaultExcludes = new [] { "exclude links here" },
-    LoggerFactory = new LoggerFactory().AddSerilog() // Serilog support if you wish
 });
 ```
 
 ## Get Image
 
 ```c#
-var image = await client.WaifuImage.GetRandomSfwAsync(SfwCategory.Waifu);
-await Console.Out.WriteLineAsync(image.ImageUrl);
+var image = await client.GetRandomSfwAsync(SfwCategory.Waifu);
+await Console.Out.WriteLineAsync(image);
 ```
 
 ## Get Images
 ```c#
-var image = await client.WaifuImages.GetManyRandomSfwAsync(SfwCategory.Waifu);
-await Console.Out.WriteLineAsync(image.ImageUrl);
+var image = await client.GetManyRandomSfwAsync(SfwCategory.Waifu);
+foreach (var image in images)
+{
+    await Console.Out.WriteLineAsync(images);
+}
 ```
+
+## Todo 
+- Fixed logging, it works for now but needs to be better.
