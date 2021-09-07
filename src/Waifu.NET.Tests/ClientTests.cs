@@ -14,25 +14,25 @@ namespace Waifu.Tests
 		[Fact]
 		public async Task Test_ClientImages()
 		{
-			var images = await this._client.WaifuImages.GetManyRandomNsfwAsync();
+			var images = await _client.GetManyRandomSfwAsync();
 			Assert.NotNull(images);
-			Assert.NotEmpty(images.Files);
+			Assert.NotEmpty(images);
 
-			images = await this._client.WaifuImages.GetManyRandomSfwAsync();
+			images = await _client.GetManyRandomSfwAsync();
 			Assert.NotNull(images);
-			Assert.NotEmpty(images.Files);
+			Assert.NotEmpty(images);
 		}
 		
 		[Fact]
 		public async Task Test_ClientImage()
 		{
-			var image = await this._client.WaifuImage.GetRandomNsfwAsync();
+			var image = await _client.GetRandomNsfwAsync();
 			Assert.NotNull(image);
-			Assert.NotNull(image.ImageUrl);
+			Assert.NotNull(image);
 			
-			image = await this._client.WaifuImage.GetRandomSfwAsync();
+			image = await _client.GetRandomSfwAsync();
 			Assert.NotNull(image);
-			Assert.NotNull(image.ImageUrl);
+			Assert.NotNull(image);
 		}
 	}
 }
