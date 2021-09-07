@@ -1,5 +1,4 @@
-﻿
-namespace Waifu
+﻿namespace Waifu
 {
 	using System;
 	using Entities;
@@ -33,6 +32,8 @@ namespace Waifu
 			_cancellationTokenSource = new CancellationTokenSource();
 			_cancellationToken = _cancellationTokenSource.Token;
 			_config = config;
+			
+			_config.Logger ??= new Logger<WaifuClient>(new LoggerFactory());
 		}
 		
 		/// <summary>
@@ -52,11 +53,8 @@ namespace Waifu
 				excludes.ConcatQ(_config.DefaultExcludes);
 			}
 
-			if (_config.Logger != null)
-			{
-				_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
-			}			
-			
+			_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
+
 			var url = Endpoints.GetSfwEndpoint(category, true);
 			var response = await _client.PostAsJsonAsync(url, new { exclude = excludes }, _cancellationToken);
 			
@@ -91,11 +89,8 @@ namespace Waifu
 				excludes.ConcatQ(_config.DefaultExcludes);
 			}
 
-			if (_config.Logger != null)
-			{
-				_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random NSFWs");
-			}
-			
+			_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
+
 			var url = Endpoints.GetNsfwEndpoint(category, true);
 			var response = await _client.PostAsJsonAsync(url, new { exclude = excludes }, _cancellationToken);
 			
@@ -121,10 +116,7 @@ namespace Waifu
 		/// <returns>WaifuImage</returns>
 		public async Task<string> GetRandomSfwAsync(SfwCategory category = SfwCategory.Waifu)
 		{
-			if (_config.Logger != null)
-			{
-				_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random SFW");
-			}			
+			_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
 
 			var url = Endpoints.GetSfwEndpoint(category, false);
 			var response = await _client.GetAsync(url, _cancellationToken);
@@ -150,10 +142,7 @@ namespace Waifu
 		/// <returns>WaifuImage</returns>
 		public async Task<string> GetRandomNsfwAsync(NsfwCategory category = NsfwCategory.Waifu)
 		{
-			if (_config.Logger != null)
-			{
-				_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching Random NSFW");
-			}			
+			_config.Logger.Log(LogLevel.Information, LoggerEvents.RestRx, "Fetching 30 Random SFWs");
 			
 			var url = Endpoints.GetNsfwEndpoint(category, false);
 			var response = await _client.GetAsync(url, _cancellationToken);
