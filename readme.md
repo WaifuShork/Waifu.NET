@@ -25,7 +25,7 @@ await Console.Out.WriteLineAsync(image);
 var image = await client.GetManyRandomSfwAsync(SfwCategory.Waifu);
 foreach (var image in images)
 {
-    await Console.Out.WriteLineAsync(images);
+    await Console.Out.WriteLineAsync(image);
 }
 ```
 
